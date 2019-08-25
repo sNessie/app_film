@@ -13,14 +13,20 @@ public class Person {
         String email = input.nextLine();
         String name = email.replace("@", "").replace(".", "");
         Path path = Paths.get(Constans.PATH + name);
-        Film film = Film.addFilm();
-        try {
-            if (!Files.exists(path)) {
-                Files.createFile(path);
+        System.out.println("Czy chcesz dodać nowy film? T/N");
+        String answer = input.nextLine();
+        while (!answer.equals("N") ) {
+            Film film = Film.addFilm();
+            try {
+                if (!Files.exists(path)) {
+                    Files.createFile(path);
+                }
+                Files.write(path, (film.toString() + System.lineSeparator()).getBytes(), StandardOpenOption.APPEND);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-            Files.write(path, (film.toString()+ System.lineSeparator()).getBytes(), StandardOpenOption.APPEND);
-        } catch (IOException e){
-            e.printStackTrace();
+            System.out.println("Czy chcesz dodać nowy film? T/N");
+            answer = input.nextLine();
         }
     }
 
