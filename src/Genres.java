@@ -1,10 +1,10 @@
 public enum Genres {
 
-    ACTION("Action"),
-    COMEDY("Comedy"),
-    DRAMA("Drama"),
-    THRILLER("Thriller"),
-    SCIFI("Sci-fi");
+    ACTION("action"),
+    COMEDY("comedy"),
+    DRAMA("drama"),
+    THRILLER("thriller"),
+    SCIFI("scifi");
 
 
     private String genres;
@@ -16,4 +16,5 @@ public enum Genres {
     public String getValue() {
         return genres;
     }
+
 }
