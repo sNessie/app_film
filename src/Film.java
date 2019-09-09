@@ -1,3 +1,6 @@
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 
 public class Film {
@@ -46,7 +49,7 @@ public class Film {
 
     }
 
-    static Film addNewFilm(List<String> film) {
+    static Film addNewFilmToFile(List<String> film) {
         Film newFilm = new FilmBuilder()
                 .title(film.get(0))
                 .year(Integer.parseInt(film.get(1)))
@@ -55,6 +58,25 @@ public class Film {
                 .build();
         return newFilm;
     }
+
+    static void readFilmFromFile(Path path) {
+        try {
+            Film film;
+            for (String line : Files.readAllLines(path)) {
+                String[] elements = line.split(" - ");
+                film = new FilmBuilder()
+                        .title(elements[0])
+                        .year(Integer.parseInt(elements[1]))
+                        .director(elements[2])
+                        .genres(Genres.valueOf(elements[3]))
+                        .build();
+                System.out.println(film.toString());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     @Override
     public String toString() {
